@@ -6,6 +6,7 @@ name: admin-quality
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -80,6 +81,9 @@ jobs:
   gitleaks:
     name: Secrets (gitleaks)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -93,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: aquasecurity/trivy-action@0.28.0
+      - uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
