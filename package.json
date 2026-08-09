@@ -28,8 +28,13 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^6.3.2",
+    "antd": "^6.5.4",
+    "dayjs": "^1.11.21",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.2",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^7.0.0",
@@ -43,6 +48,7 @@
     "husky": "^9.1.7",
     "jsdom": "^30.0.1",
     "lint-staged": "^17.2.0",
+    "msw": "^2.15.0",
     "oxlint": "^1.71.0",
     "prettier": "^3.9.6",
     "typescript": "~6.0.2",
