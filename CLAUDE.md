@@ -23,7 +23,22 @@ npm run lint       # oxlint
 - **Biblioteca de componentes:** **Ant Design** — escolhida entre as opções do ADR-009
   (Ant Design vs shadcn/ui): o painel é pesado em tabelas/formulários (fila de
   contestações, ações do moderador) e o AntD entrega isso pronto, maximizando a
-  velocidade para um time de 1-2 pessoas. Instalar ao construir a 1ª tela real.
+  velocidade para um time de 1-2 pessoas.
+- **Roteamento:** React Router (`BrowserRouter`), mesma biblioteca do mobile
+  (React Navigation é o equivalente nativo). Rotas protegidas por `RotaProtegida`
+  (`src/components/RotaProtegida.tsx`), que exige `ROLE_MODERADOR`.
+- **Estado:** **Zustand** — mesma escolha do mobile (ADR-001), por consistência entre os
+  dois frontends. `authStore` (sessão) e `pendenciasStore` (contadores de fila no menu).
+- **Tokens:** o backend devolve os tokens no corpo JSON (sem cookie httpOnly — não há
+  BFF). Guardados em `sessionStorage` + cópia em memória (`src/services/tokenStore.ts`),
+  não em `localStorage`: sobrevive a reload da aba mas some ao fechar o navegador,
+  reduzindo a janela de exposição do refresh token em XSS. O login não devolve o perfil
+  do usuário — `ROLE_MODERADOR` é lido da claim `roles` do JWT no cliente
+  (`src/services/jwt.ts`); sem essa claim, acesso negado (`Result status="403"`).
+  Interceptor de refresh em `src/services/api.ts`, mesmo padrão do mobile (`api.ts` +
+  `tokenStore.ts`): refresh único deduplicado em 401, logout automático se falhar.
+- **Testes de componente:** MSW (`msw/node`) mocka a API nos testes das filas
+  (`src/mocks/server.ts`, registrado globalmente em `vitest.setup.ts`).
 - **TypeScript estrito** (`strict: true`). Ver skill `convencoes`.
 
 ## Regra de acesso

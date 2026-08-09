@@ -1,20 +1,29 @@
-import { useEffect, useState } from 'react';
-import { fetchHealthStatus, type HealthStatus } from './services/health';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { PainelLayout } from './components/PainelLayout';
+import { RotaProtegida } from './components/RotaProtegida';
+import { LoginPage } from './pages/auth/LoginPage';
+import { FilaContestacoesPage } from './pages/contestacoes/FilaContestacoesPage';
+import { AnaliseContestacaoPage } from './pages/contestacoes/AnaliseContestacaoPage';
+import { FilaSinalizadosPage } from './pages/sinalizados/FilaSinalizadosPage';
+import { HistoricoPage } from './pages/historico/HistoricoPage';
+import { ConfiguracoesPage } from './pages/configuracoes/ConfiguracoesPage';
 
 function App() {
-  const [status, setStatus] = useState<HealthStatus>('checking');
-
-  useEffect(() => {
-    fetchHealthStatus().then(setStatus);
-  }, []);
-
-  const statusLabel = status === 'checking' ? 'verificando...' : status === 'ok' ? 'ok' : 'offline';
-
   return (
-    <>
-      <h1>Painel de Moderação — ReclamaApp</h1>
-      <p>API: {statusLabel}</p>
-    </>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<RotaProtegida />}>
+        <Route element={<PainelLayout />}>
+          <Route index element={<Navigate to="/contestacoes" replace />} />
+          <Route path="contestacoes" element={<FilaContestacoesPage />} />
+          <Route path="contestacoes/:id" element={<AnaliseContestacaoPage />} />
+          <Route path="sinalizados" element={<FilaSinalizadosPage />} />
+          <Route path="historico" element={<HistoricoPage />} />
+          <Route path="configuracoes" element={<ConfiguracoesPage />} />
+        </Route>
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
