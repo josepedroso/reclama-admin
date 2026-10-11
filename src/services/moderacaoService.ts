@@ -7,7 +7,9 @@ import type {
   ConfiguracaoResponse,
   ContestacaoFilaResponse,
   HistoricoFiltro,
+  ImagensPendentesResponse,
   ResolverContestacaoRequest,
+  ResolverImagensRequest,
   ResolverSinalizadoRequest,
   SinalizadoResponse,
   StatusContestacao,
@@ -36,6 +38,20 @@ export function listarSinalizados(
 
 export function resolverSinalizado(id: string, req: ResolverSinalizadoRequest): Promise<void> {
   return apiFetch(`/api/moderacao/sinalizados/${id}/resolver`, { metodo: 'POST', corpo: req });
+}
+
+export function listarImagensPendentes(
+  pagina: number,
+  tamanho = 20
+): Promise<PaginaResponse<ImagensPendentesResponse>> {
+  return apiFetch(`/api/moderacao/imagens?pagina=${pagina}&tamanho=${tamanho}`);
+}
+
+export function resolverImagens(reclamacaoId: string, req: ResolverImagensRequest): Promise<void> {
+  return apiFetch(`/api/moderacao/imagens/${reclamacaoId}/resolver`, {
+    metodo: 'POST',
+    corpo: req,
+  });
 }
 
 export function listarHistorico(

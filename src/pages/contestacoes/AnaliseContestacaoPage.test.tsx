@@ -41,6 +41,15 @@ describe('AnaliseContestacaoPage', () => {
       http.get(`${API_BASE_URL}/api/moderacao/contestacoes`, () =>
         HttpResponse.json(pagina([primeiro, segundo]))
       ),
+      http.get(`${API_BASE_URL}/api/moderacao/imagens`, () =>
+        HttpResponse.json({
+          conteudo: [],
+          pagina: 0,
+          tamanho: 1,
+          totalElementos: 0,
+          totalPaginas: 0,
+        })
+      ),
       http.get(`${API_BASE_URL}/api/moderacao/sinalizados`, () =>
         HttpResponse.json({
           conteudo: [],
