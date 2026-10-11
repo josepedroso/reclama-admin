@@ -5,6 +5,7 @@ import { LoginPage } from './pages/auth/LoginPage';
 import { FilaContestacoesPage } from './pages/contestacoes/FilaContestacoesPage';
 import { AnaliseContestacaoPage } from './pages/contestacoes/AnaliseContestacaoPage';
 import { FilaSinalizadosPage } from './pages/sinalizados/FilaSinalizadosPage';
+import { FilaImagensPage } from './pages/imagens/FilaImagensPage';
 import { HistoricoPage } from './pages/historico/HistoricoPage';
 import { ConfiguracoesPage } from './pages/configuracoes/ConfiguracoesPage';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="contestacoes" element={<FilaContestacoesPage />} />
           <Route path="contestacoes/:id" element={<AnaliseContestacaoPage />} />
           <Route path="sinalizados" element={<FilaSinalizadosPage />} />
+          <Route path="imagens" element={<FilaImagensPage />} />
           <Route path="historico" element={<HistoricoPage />} />
           <Route path="configuracoes" element={<ConfiguracoesPage />} />
         </Route>

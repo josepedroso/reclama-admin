@@ -36,13 +36,35 @@ export interface ResolverSinalizadoRequest {
   acao: AcaoSinalizado;
 }
 
+export type AcaoImagem = 'APROVAR' | 'REPROVAR';
+
+export interface ImagemModeracaoResponse {
+  id: string;
+  urlMiniatura: string;
+  urlGrande: string;
+}
+
+export interface ImagensPendentesResponse {
+  reclamacaoId: string;
+  titulo: string;
+  descricao: string;
+  imagens: ImagemModeracaoResponse[];
+}
+
+export interface ResolverImagensRequest {
+  acao: AcaoImagem;
+  motivo?: string;
+}
+
 export type TipoAcaoModerador =
   | 'ACESSO_FILA_CONTESTACOES'
   | 'CONTESTACAO_MANTIDA'
   | 'CONTESTACAO_SEPARADA'
   | 'CONTESTACAO_REJEITADA'
   | 'SINALIZADO_APROVADO'
-  | 'SINALIZADO_MANTIDO_BLOQUEIO';
+  | 'SINALIZADO_MANTIDO_BLOQUEIO'
+  | 'IMAGENS_APROVADAS'
+  | 'IMAGENS_REPROVADAS';
 
 export interface AcaoModeradorResponse {
   id: string;
