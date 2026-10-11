@@ -4,7 +4,7 @@ import { Alert, Button, Card, Form, Input, Result, Typography } from 'antd';
 import { useAuthStore } from '../../stores/authStore';
 
 interface FormValues {
-  identificador: string;
+  email: string;
   senha: string;
 }
 
@@ -32,7 +32,7 @@ export function LoginPage() {
   async function aoEnviar(valores: FormValues) {
     setEnviando(true);
     try {
-      await login(valores.identificador, valores.senha);
+      await login(valores.email, valores.senha);
     } catch {
       // erro ja exposto via erroLogin no store
     } finally {
@@ -58,9 +58,12 @@ export function LoginPage() {
         )}
         <Form<FormValues> layout="vertical" onFinish={aoEnviar} disabled={enviando}>
           <Form.Item
-            name="identificador"
-            label="CPF ou e-mail"
-            rules={[{ required: true, message: 'Informe o CPF ou e-mail' }]}
+            name="email"
+            label="E-mail"
+            rules={[
+              { required: true, message: 'Informe o e-mail' },
+              { type: 'email', message: 'E-mail inválido' },
+            ]}
           >
             <Input autoFocus autoComplete="username" />
           </Form.Item>
