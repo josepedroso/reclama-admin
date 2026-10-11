@@ -18,7 +18,7 @@ interface AuthState {
   erroLogin: string | null;
   /** Le os tokens do sessionStorage na abertura do painel e valida o perfil (ROLE_MODERADOR). */
   restaurarSessao: () => void;
-  login: (identificador: string, senha: string) => Promise<void>;
+  login: (email: string, senha: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -45,10 +45,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     set(aplicarToken(token));
   },
 
-  login: async (identificador, senha) => {
+  login: async (email, senha) => {
     set({ erroLogin: null });
     try {
-      const tokens = await authService.login(identificador, senha);
+      const tokens = await authService.login(email, senha);
       salvarTokens(tokens.accessToken, tokens.refreshToken);
       set(aplicarToken(tokens.accessToken));
     } catch {

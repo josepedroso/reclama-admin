@@ -1,8 +1,8 @@
 import { apiFetch } from './api';
 import type { LoginRequest, TokenResponse } from '../types/auth';
 
-export function login(identificador: string, senha: string): Promise<TokenResponse> {
-  const corpo: LoginRequest = { identificador, senha };
+export function login(email: string, senha: string): Promise<TokenResponse> {
+  const corpo: LoginRequest = { email, senha };
   return apiFetch<TokenResponse>('/api/auth/login', { metodo: 'POST', corpo, autenticado: false });
 }
 
