@@ -5,6 +5,7 @@ import {
   AuditOutlined,
   FlagOutlined,
   LogoutOutlined,
+  PictureOutlined,
   SettingOutlined,
   SolutionOutlined,
 } from '@ant-design/icons';
@@ -16,6 +17,7 @@ const { Header, Sider, Content } = Layout;
 const ITENS = [
   { chave: '/contestacoes', rotulo: 'Contestações', icone: <SolutionOutlined /> },
   { chave: '/sinalizados', rotulo: 'Sinalizados', icone: <FlagOutlined /> },
+  { chave: '/imagens', rotulo: 'Imagens', icone: <PictureOutlined /> },
   { chave: '/historico', rotulo: 'Histórico', icone: <AuditOutlined /> },
   { chave: '/configuracoes', rotulo: 'Configurações', icone: <SettingOutlined /> },
 ];
@@ -25,7 +27,7 @@ export function PainelLayout() {
   const location = useLocation();
   const moderadorId = useAuthStore((s) => s.moderadorId);
   const logout = useAuthStore((s) => s.logout);
-  const { contestacoes, sinalizados, atualizar } = usePendenciasStore();
+  const { contestacoes, sinalizados, imagens, atualizar } = usePendenciasStore();
 
   useEffect(() => {
     atualizar();
@@ -36,6 +38,7 @@ export function PainelLayout() {
   const contadores: Record<string, number> = {
     '/contestacoes': contestacoes,
     '/sinalizados': sinalizados,
+    '/imagens': imagens,
   };
 
   return (

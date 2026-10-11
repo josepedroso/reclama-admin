@@ -14,6 +14,8 @@ const TIPOS: Array<{ valor: TipoAcaoModerador; rotulo: string }> = [
   { valor: 'CONTESTACAO_REJEITADA', rotulo: 'Contestação rejeitada' },
   { valor: 'SINALIZADO_APROVADO', rotulo: 'Sinalizado aprovado' },
   { valor: 'SINALIZADO_MANTIDO_BLOQUEIO', rotulo: 'Sinalizado mantido bloqueado' },
+  { valor: 'IMAGENS_APROVADAS', rotulo: 'Imagens aprovadas' },
+  { valor: 'IMAGENS_REPROVADAS', rotulo: 'Imagens reprovadas' },
 ];
 
 export function HistoricoPage() {
